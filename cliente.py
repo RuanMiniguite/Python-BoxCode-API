@@ -12,14 +12,20 @@ def menu():
     print("| 3 |  Alterar   Usuario              |")
     print("| 4 |  Excluir   Usuario              |")
     print("-------------------:-------------------")
-    print("| 6 |  Cadastrar Projeto              |")
-    print("| 5 |  Exibir    Projeto              |")
-    print("| 8 |  Alterar   Projeto              |")
-    print("| 7 |  Excluir   Projeto              |")
+    print("| 5 |  Cadastrar Projeto              |")
+    print("| 6 |  Exibir    Projeto              |")
+    print("| 7 |  Alterar   Projeto              |")
+    print("| 8 |  Excluir   Projeto              |")
+    print("-------------------:-------------------")
+    print("| 9 |  SAIR                           |")
     print("-------------------:-------------------")
 
 
 def main():
+
+  opc = None
+  while opc != "9":
+
     os.system('clear') or None
     menu()
     opc = input("Informe uma opcao: \n")
@@ -47,6 +53,9 @@ def main():
 
     elif opc == "8":    
       pass
+
+    elif opc == "9":    
+      exit()
     
     sleep(1)
     input("Pressione ENTER para continuar!\n")
