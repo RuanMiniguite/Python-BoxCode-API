@@ -3,53 +3,43 @@ from sqlalchemy import Column, Date, Integer, String, Float
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-NOME_BANCO = "meubanco"
+NOME_BANCO = "boxcode"
 
 engine = create_engine(f"sqlite:///./{NOME_BANCO}.sqlite", echo=True)
 Base = declarative_base()
 
 # Declaracao das classes
+class Fisica(Base):
 
-
-class Cliente(Base):
-
-    __tablename__ = "cliente"
+    __tablename__ = "fisica"
 
     id = Column(Integer, primary_key=True)
     nome = Column(String, nullable=False)
-    endereco = Column(String, nullable=False)
+    idade = Column(String, nullable=False)
+    instEnsino = Column(String, nullable=False)
+    cpf = Column(String, nullable=False)
+    projeto_id = Column(Integer, ForeignKey("projeto.id"))
 
     def __repr__(self):
-        return f"Cliente {self.nome}"
+        return f"Fisica {self.nome}"
 
-
-class Produto(Base):
-    __tablename__ = "produto"
+class Juridica(Base):
+    __tablename__ = "juridica"
 
     id = Column(Integer, primary_key=True)
     nome = Column(String, nullable=False)
-    preco = Column(Float, nullable=False)
+    segmento = Column(String, nullable=False)
+    cnpj = Column(String, nullable=False)
+    projeto_id = Column(Integer, ForeignKey("projeto.id"))
 
     def __repr__(self) -> str:
-        return f"Produto {self.nome}"
+        return f"Juridica {self.nome}"
 
-
-class Carrinho(Base):
-    __tablename__ = "carrinho"
+class Projeto(Base):
+    __tablename__ = "projeto"
     id = Column(Integer, primary_key=True)
-    preco = Column(Float, nullable=False)
-    qtd = Column(Integer, nullable=False)
-    produto_id = Column(Integer, ForeignKey("produto.id"))
-    venda_id = Column(Integer, ForeignKey("venda.id"))
-
-
-class Venda(Base):
-
-    __tablename__ = "venda"
-
-    id = Column(Integer, primary_key=True)
-    cliente_id = Column(Integer, ForeignKey("cliente.id"))
-
+    nome = Column(String, nullable=False)
+    segmento = Column(String, nullable=False)
 
 # fim da declaracao
 
