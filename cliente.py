@@ -6,12 +6,12 @@ import os
 url = "http://127.0.0.1:8080"
 
 def menu():
-    print("-------------------:------------------")
+    print("-------------------:-------------------")
     print("| 1 |  Cadastrar Usuario              |")
     print("| 2 |  Exibir    Usuario              |")
     print("| 3 |  Alterar   Usuario              |")
     print("| 4 |  Excluir   Usuario              |")
-    print("-------------------:------------------")
+    print("-------------------:-------------------")
     print("| 6 |  Cadastrar Projeto              |")
     print("| 5 |  Exibir    Projeto              |")
     print("| 8 |  Alterar   Projeto              |")
@@ -52,20 +52,14 @@ def main():
     input("Pressione ENTER para continuar!\n")
 
 
+# cliente = {"nome": "Joao Pedro", "endereco": "Rua XYZ"}
+# requests.post(f"{url}/cliente", json=cliente)
 
+# cliente = {"id": "01", "nome": "Ruan", "endereco": "Rua XYZ"}
+# requests.put(f"{url}/cliente", json=cliente)
 
-
-cliente = {"nome": "Joao Pedro", "endereco": "Rua XYZ"}
-requests.post(f"{url}/cliente", json=cliente)
-
-
-cliente = {"id": "01", "nome": "Ruan", "endereco": "Rua XYZ"}
-requests.put(f"{url}/cliente", json=cliente)
-
-r = requests.get(f"{url}/cliente")
-pprint(r.json())
-
-
+# r = requests.get(f"{url}/cliente")
+# pprint(r.json())
 
 if __name__ == "__main__":
     main()
