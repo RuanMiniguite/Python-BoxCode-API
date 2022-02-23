@@ -5,7 +5,9 @@ import os
 
 url = "http://127.0.0.1:8080"
 
+
 def menu():
+  os.system('clear') or None
   print("-------------------:-------------------")
   print("| 1 |  Cadastrar Usuario              |")
   print("| 2 |  Exibir    Usuario              |")
@@ -21,6 +23,7 @@ def menu():
   print("-------------------:-------------------")
 
 def menu1():
+  os.system('clear') or None
   print("-------------------:-------------------")
   print("| 1 |  Pessoa Física                  |")
   print("| 2 |  Pessoa Jurídica                |")
@@ -29,25 +32,22 @@ def menu1():
 
 
 def main():
-
   opc = None
   while opc != "9":
-
-    os.system('clear') or None
     menu()
     opc = input("Informe uma opcao: \n")
 
-    if opc == "1":      #Cadastrar Usuario   
-      pass
+    if opc == "1":        #Cadastrar Usuario   
+      cadastroUser()
 
-    elif opc == "2":    
-      pass
+    elif opc == "2":      #Exibir Usuario   
+      exibirUser()
     
-    elif opc == "3":    
-      pass
+    elif opc == "3":      #Alterar Usuario
+      alterarUser()
 
-    elif opc == "4":    
-      pass
+    elif opc == "4":      #Excluir Usuario
+      excluirUser()
     
     elif opc == "5":    
       pass
@@ -69,13 +69,15 @@ def main():
 
 
 
+# ------------------------ USER ------------------------
+
 def cadastroUser():
-  while opc != 1 and 2:
-    os.system('clear') or None
+  opc = None
+  while opc != 1 and opc != 2:
     menu1()
     opc = input("Informe uma opcao: \n")
 
-    if opc == 1:        #Fisica
+    if opc == "1":        #Fisica
       nome =  input("Informe nome: ")
       idade = input("Informe idade: ")
       cpf = input("Informe cpf: ")
@@ -84,7 +86,7 @@ def cadastroUser():
       data = {"nome": nome, "idade": idade, "cpf": cpf, "instEnsino": instEnsino}
       requests.post(f"{url}/addfisica", json=data)
 
-    elif opc == 2:      #Juridica
+    elif opc == "2":      #Juridica
       nome =  input("Informe nome: ")
       segmento = input("Informe idade: ")
       cnpj = input("Informe cpf: ")      
@@ -96,12 +98,59 @@ def cadastroUser():
       print("Opção invalida!")
       input("Pressione ENTER para continuar!\n")
 
+def exibirUser():
+  opc = None
+  while opc != 1 and opc != 2:
+    menu1()
+    opc = input("Informe uma opcao: \n")
+
+    if opc == "1":
+      id = input("Informe o ID: ")
+      resp = requests.get(f"{url}/fisica/" + id)
+      pprint(resp.json())
+
+    elif opc == "2":
+      id = input("Informe o ID: ")
+      resp = requests.get(f"{url}/juridica/" + id)
+      pprint(resp.json())
+
+    else:
+      print("Opção invalida!")
+      input("Pressione ENTER para continuar!\n")
+
+def alterarUser():
+  pass
+
+def excluirUser():
+  opc = None
+  while opc != 1 and opc != 2:
+    menu1()
+    opc = input("Informe uma opcao: \n")
+
+    if opc == "1":
+      id = input("Informe o ID: ")
+      resp = requests.delete(f"{url}/fisica/" + id)
+      pprint(resp.json())
+
+    elif opc == "2":
+      id = input("Informe o ID: ")
+      resp = requests.delete(f"{url}/juridica/" + id)
+      pprint(resp.json())
+
+    else:
+      print("Opção invalida!")
+      input("Pressione ENTER para continuar!\n")
+
+# ------------------------ PROJETO ------------------------
+
+
+
+
+
+
+
 if __name__ == "__main__":
-    main()
-
-
-
-
+  main()
 
 
 
