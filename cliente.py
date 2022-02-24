@@ -29,6 +29,13 @@ def menu1():
     print("| 2 |  Pessoa Jurídica        Sair[0] |")
     print("-------------------:-------------------")
 
+def menu2():
+    os.system('clear') or None
+    print("-------------------:-------------------")
+    print("|        Deseja alterar usuario       |")
+    print("|         [1] Sim      [2] Não        |")
+    print("-------------------:-------------------")
+
 def main():
     opc = None
     while opc != "9":
@@ -70,6 +77,7 @@ def main():
 def cadastroUser():
     opc = None
     while opc != 1 and opc != 2 and opc != 0:
+        
         menu1()
         opc = input("Informe uma opcao: \n")
 
@@ -77,10 +85,11 @@ def cadastroUser():
             nome =  input("Informe nome: ")
             idade = input("Informe idade: ")
             cpf = input("Informe cpf: ")
-            instEnsino = input("Informe Instuição de ensino: ")
+            instEnsino = input("Informe Instuicao de ensino: ")
             
             data = {"nome": nome, "idade": idade, "cpf": cpf, "instEnsino": instEnsino}
             requests.post(f"{url}/fisica", json=data)
+        
         elif opc == "2":      #Juridica
             nome =  input("Informe nome: ")
             segmento = input("Informe segmento: ")
@@ -88,6 +97,7 @@ def cadastroUser():
 
             data = {"nome": nome, "segmento": segmento, "cnpj": cnpj}
             requests.post(f"{url}/juridica", json=data)
+        
         else:
             print("Opção invalida!")
             input("Pressione ENTER para continuar!\n")
@@ -97,18 +107,21 @@ def cadastroUser():
 def exibirUser():
     opc = None
     while opc != 1 and opc != 2 and opc != 0:
+       
         menu1()
         opc = input("Informe uma opcao: \n")
 
-        if opc == "1":
+        if opc == "1":           #Fisica
             cpf = input("Informe o cpf: ")
             resp = requests.get(f"{url}/fisica/" + cpf)
             pprint(resp.json())
             input("Pressione ENTER para continuar!\n")
-        elif opc == "2":
+        
+        elif opc == "2":         #Juridica
             cpf = input("Informe o cpf: ")
             resp = requests.get(f"{url}/juridica/" + cpf)
             pprint(resp.json())
+        
         else:
             print("Opção invalida!")
             input("Pressione ENTER para continuar!\n")
@@ -116,11 +129,59 @@ def exibirUser():
     input("Pressione ENTER para continuar!\n")
 
 def alterarUser():
-    pass
+    opc = None
+    while opc != 1 and opc != 2 and opc != 0:
+        
+        menu1()
+        opc = input("Informe uma opcao: \n")
+
+        if opc == "1":           #Fisica
+            cpf = input("Informe o cpf: ")
+            resp = requests.get(f"{url}/fisica/" + cpf)
+            pprint(resp.json())
+            
+            menu2()
+            opc1 = input("Informe uma opcao: ")
+            
+            if opc1 == 1:
+                nome =  input("Informe nome: ")
+                idade = input("Informe idade: ")
+                instEnsino = input("Informe Instuicao de ensino: ")
+
+                data = {"nome": nome, "idade": idade, "cpf": cpf, "instEnsino": instEnsino}
+                requests.put(f"{url}/fisica", json=data)
+            else:
+                exit()
+
+            input("Pressione ENTER para continuar!\n")
+        elif opc == "2":         #Juridica
+            cnpj = input("Informe o cnpj: ")
+            resp = requests.get(f"{url}/juridica/" + cpf)
+            pprint(resp.json())
+
+            menu2()
+            opc1 = input("Informe uma opcao: ")
+            if opc1 == 1:
+                nome =  input("Informe nome: ")
+                segmento = input("Informe segmento: ")
+
+                data = {"nome": nome, "segmento": segmento, "cnpj": cnpj}
+                requests.post(f"{url}/juridica", json=data)
+           
+            else:
+                exit()
+
+
+        else:
+            print("Opção invalida!")
+            input("Pressione ENTER para continuar!\n")
+
+    input("Pressione ENTER para continuar!\n")
 
 def excluirUser():
     opc = None
     while opc != 1 and opc != 2 and opc != 0:
+       
         menu1()
         opc = input("Informe uma opcao: \n")
 
