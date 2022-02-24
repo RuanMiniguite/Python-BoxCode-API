@@ -26,7 +26,7 @@ def menu1():
     os.system('clear') or None
     print("-------------------:-------------------")
     print("| 1 |  Pessoa Física                  |")
-    print("| 2 |  Pessoa Jurídica                |")
+    print("| 2 |  Pessoa Jurídica        Sair[0] |")
     print("-------------------:-------------------")
 
 def main():
@@ -68,37 +68,35 @@ def main():
 
 # ------------------------ USER ------------------------
 def cadastroUser():
-  opc = None
-  while opc != 1 and opc != 2:
-    menu1()
-    opc = input("Informe uma opcao: \n")
+    opc = None
+    while opc != 1 and opc != 2 and opc != 0:
+        menu1()
+        opc = input("Informe uma opcao: \n")
 
-    if opc == "1":        #Fisica
-      nome =  input("Informe nome: ")
-      idade = input("Informe idade: ")
-      cpf = input("Informe cpf: ")
-      instEnsino = input("Informe Instuição de ensino: ")
-      
-      data = {"nome": nome, "idade": idade, "cpf": cpf, "instEnsino": instEnsino}
-      requests.post(f"{url}/fisica", json=data)
+        if opc == "1":        #Fisica
+            nome =  input("Informe nome: ")
+            idade = input("Informe idade: ")
+            cpf = input("Informe cpf: ")
+            instEnsino = input("Informe Instuição de ensino: ")
+            
+            data = {"nome": nome, "idade": idade, "cpf": cpf, "instEnsino": instEnsino}
+            requests.post(f"{url}/fisica", json=data)
+        elif opc == "2":      #Juridica
+            nome =  input("Informe nome: ")
+            segmento = input("Informe segmento: ")
+            cnpj = input("Informe cnpj: ")      
 
-    elif opc == "2":      #Juridica
-      nome =  input("Informe nome: ")
-      segmento = input("Informe segmento: ")
-      cnpj = input("Informe cnpj: ")      
-
-      data = {"nome": nome, "segmento": segmento, "cnpj": cnpj}
-      requests.post(f"{url}/juridica", json=data)
-
-    else:
-      print("Opção invalida!")
-      input("Pressione ENTER para continuar!\n")
+            data = {"nome": nome, "segmento": segmento, "cnpj": cnpj}
+            requests.post(f"{url}/juridica", json=data)
+        else:
+            print("Opção invalida!")
+            input("Pressione ENTER para continuar!\n")
 
     input("Pressione ENTER para continuar!\n")  
 
 def exibirUser():
     opc = None
-    while opc != 1 and opc != 2:
+    while opc != 1 and opc != 2 and opc != 0:
         menu1()
         opc = input("Informe uma opcao: \n")
 
@@ -107,22 +105,23 @@ def exibirUser():
             resp = requests.get(f"{url}/fisica/" + cpf)
             pprint(resp.json())
             input("Pressione ENTER para continuar!\n")
-
         elif opc == "2":
             cpf = input("Informe o cpf: ")
             resp = requests.get(f"{url}/juridica/" + cpf)
             pprint(resp.json())
-
         else:
             print("Opção invalida!")
             input("Pressione ENTER para continuar!\n")
 
+    input("Pressione ENTER para continuar!\n")
+
 def alterarUser():
-  pass
+    pass
 
 def excluirUser():
     opc = None
-    while opc != 1 and opc != 2:
+    while opc != 1 and opc != 2 and opc != 0:
+        menu1()
         opc = input("Informe uma opcao: \n")
 
         if opc == "1":
@@ -138,6 +137,9 @@ def excluirUser():
         else:
             print("Opção invalida!")
             input("Pressione ENTER para continuar!\n")
+
+    input("Pressione ENTER para continuar!\n")
+    
 
 
 # ------------------------ PROJETO ------------------------
