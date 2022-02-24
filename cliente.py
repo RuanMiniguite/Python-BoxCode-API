@@ -85,10 +85,10 @@ def cadastroUser():
     elif opc == "2":      #Juridica
       nome =  input("Informe nome: ")
       segmento = input("Informe segmento: ")
-      cnpj = input("Informe cpf: ")      
+      cnpj = input("Informe cnpj: ")      
 
       data = {"nome": nome, "segmento": segmento, "cnpj": cnpj}
-      requests.post(f"{url}/addjuridica", json=data)
+      requests.post(f"{url}/juridica", json=data)
 
     else:
       print("Opção invalida!")
@@ -144,10 +144,10 @@ def excluirUser():
 # ------------------------ PROJETO ------------------------
 def cadastroProj():
   nome =  input("Informe nome: ")
-  segmento = input("Informe idade: ")
+  segmento = input("Informe o segmento: ")
   
   data = {"nome": nome, "segmento": segmento}
-  requests.post(f"{url}/addprojeto", json=data)
+  requests.post(f"{url}/projeto", json=data)
 
 def exibirProj():
   id = input("Informe o ID: ")

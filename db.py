@@ -18,7 +18,7 @@ class Fisica(Base):
     idade = Column(String, nullable=False)
     instEnsino = Column(String, nullable=False)
     cpf = Column(Integer, nullable=False)
-    ##projeto_id = Column(Integer, ForeignKey("projeto.id"))
+    #projeto_id = Column(Integer, ForeignKey("projeto.id"))
 
     def __repr__(self):
         return f"Fisica {self.nome}"
@@ -30,7 +30,7 @@ class Juridica(Base):
     nome = Column(String, nullable=False)
     segmento = Column(String, nullable=False)
     cnpj = Column(String, nullable=False)
-    projeto_id = Column(Integer, ForeignKey("projeto.id"))
+    #projeto_id = Column(Integer, ForeignKey("projeto.id"))
 
     def __repr__(self) -> str:
         return f"Juridica {self.nome}"
