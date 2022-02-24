@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from db import session, Fisica
 from db import Juridica, Projeto
+from pprint import pprint
 
 app = Flask(__name__)
 
@@ -11,48 +12,48 @@ def olamundo():
     return "<h1> Ola Mundo </h1>", 201
 
 
-#@app.route("/cliente", methods=["GET", "POST"])
-#@app.route("/cliente/<int:id_cliente>", methods=["GET", "PUT", "DELETE"])
-# def clientes(id_cliente=None):
-#     if request.method == "GET":
-#         if id_cliente:
-#             try:
-#                 cliente = (
-#                     session.query(Cliente)
-#                     .filter(Cliente.id == id_cliente)
-#                     .one()
-#                 )
-#                 return (
-#                     jsonify({"id": cliente.id, "nome": cliente.nome}),
-#                     200,
-#                 )
-#             except Exception as ex:
-#                 return "", 404
-#         else:
-#             lista_clientes = []
-#             clientes = session.query(Cliente).all()
-#             for c in clientes:
-#                 lista_clientes.append({"id": c.id, "nome": c.nome})
-#             return jsonify(lista_clientes), 200
-#     elif request.method == "POST":
-#         cliente = request.json
-#         session.add(
-#             Cliente(nome=cliente["nome"], endereco=cliente["endereco"])
-#         )
-#         session.commit()
-#         return "", 200
-#     elif request.method == "PUT":
-#         cliente = request.json
-#         session.query(Cliente).filter(Cliente.id == id_cliente).update(
-#             {"nome": cliente["nome"], "endereco": cliente["endereco"]}
-#         )
-#         session.commit()
-#         return "", 200
-#     elif request.method == "DELETE":
-#         session.query(Cliente).filter(
-#             Cliente.id == id_cliente
-#         ).delete()
-#         session.commit()
-#         return "", 200
+@app.route("/fisica", methods=["GET", "POST"])
+@app.route("/fisica/<int:cpf>", methods=["GET", "PUT", "DELETE"])
+def fisica(cpf = None):
+    if request.method == "GET":
+        if cpf:
+            try:
+                fisica = (
+                    session.query(Fisica)
+                    .filter(Fisica.cpf == cpf)
+                    .one()
+                )
+                return (
+                    jsonify({"cpf": fisica.cpf, "nome": fisica.nome}),
+                    200,
+                )
+            except Exception as ex:
+                return "", 404
+        else:
+            lista_fisica = []
+            fisica = session.query(Fisica).all()
+            for c in fisica:
+                lista_fisica.append({"cpf": c.cpf, "nome": c.nome})
+            return jsonify(lista_fisica), 200
+    elif request.method == "POST":
+        fisica = request.json
+        session.add(
+            Fisica(cpf = fisica["cpf"], nome = fisica["nome"], instEnsino = fisica["instEnsino"], idade = fisica["idade"])
+        )
+        session.commit()
+        return "", 200
+    elif request.method == "PUT":
+        fisica = request.json
+        session.query(Fisica).filter(Fisica.cpf == cpf).update(
+            {"nome": fisica["nome"], "instEnsino": fisica["instEnsino"]}
+        )
+        session.commit()
+        return "", 200
+    elif request.method == "DELETE":
+        session.query(Fisica).filter(
+            Fisica.cpf == cpf
+        ).delete()
+        session.commit()
+        return "", 200
 
 app.run(host="0.0.0.0", port=8080)

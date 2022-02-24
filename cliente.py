@@ -3,7 +3,7 @@ from pprint import pprint
 from time import sleep
 import os
 
-url = "http://127.0.0.1:8080"
+url = "http://0.0.0.0:8080"
 
 
 def menu():
@@ -80,7 +80,7 @@ def cadastroUser():
       instEnsino = input("Informe Instuição de ensino: ")
       
       data = {"nome": nome, "idade": idade, "cpf": cpf, "instEnsino": instEnsino}
-      requests.post(f"{url}/addfisica", json=data)
+      requests.post(f"{url}/fisica", json=data)
 
     elif opc == "2":      #Juridica
       nome =  input("Informe nome: ")
@@ -94,6 +94,8 @@ def cadastroUser():
       print("Opção invalida!")
       input("Pressione ENTER para continuar!\n")
 
+    input("Pressione ENTER para continuar!\n")  
+
 def exibirUser():
   opc = None
   while opc != 1 and opc != 2:
@@ -101,13 +103,14 @@ def exibirUser():
     opc = input("Informe uma opcao: \n")
 
     if opc == "1":
-      id = input("Informe o ID: ")
-      resp = requests.get(f"{url}/fisica/" + id)
+      cpf = input("Informe o cpf: ")
+      resp = requests.get(f"{url}/fisica/" + cpf)
       pprint(resp.json())
+      input("Pressione ENTER para continuar!\n")
 
     elif opc == "2":
-      id = input("Informe o ID: ")
-      resp = requests.get(f"{url}/juridica/" + id)
+      cpf = input("Informe o cpf: ")
+      resp = requests.get(f"{url}/juridica/" + cpf)
       pprint(resp.json())
 
     else:

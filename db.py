@@ -17,8 +17,8 @@ class Fisica(Base):
     nome = Column(String, nullable=False)
     idade = Column(String, nullable=False)
     instEnsino = Column(String, nullable=False)
-    cpf = Column(String, nullable=False)
-    projeto_id = Column(Integer, ForeignKey("projeto.id"))
+    cpf = Column(Integer, nullable=False)
+    ##projeto_id = Column(Integer, ForeignKey("projeto.id"))
 
     def __repr__(self):
         return f"Fisica {self.nome}"
