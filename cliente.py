@@ -29,13 +29,11 @@ def menu1():
   print("| 2 |  Pessoa Jurídica                |")
   print("-------------------:-------------------")
 
-
-
 def main():
   opc = None
   while opc != "9":
     menu()
-    opc = input("Informe uma opcao: \n")
+    opc = input("Informe uma opcao: ")
 
     if opc == "1":        #Cadastrar Usuario   
       cadastroUser()
@@ -49,17 +47,17 @@ def main():
     elif opc == "4":      #Excluir Usuario
       excluirUser()
     
-    elif opc == "5":    
-      pass
+    elif opc == "5":      #Cadastrar Projeto  
+      cadastroProj()
 
-    elif opc == "6":    
-      pass
+    elif opc == "6":      #Exibir Projeto
+      exibirProj()
 
-    elif opc == "7":    
-      pass
+    elif opc == "7":      #Alterar Projeto
+      alterarProj()
 
-    elif opc == "8":    
-      pass
+    elif opc == "8":      #Excluir Projeto
+      excluirProj()
 
     elif opc == "9":    
       exit()
@@ -68,9 +66,7 @@ def main():
     input("Pressione ENTER para continuar!\n")
 
 
-
 # ------------------------ USER ------------------------
-
 def cadastroUser():
   opc = None
   while opc != 1 and opc != 2:
@@ -88,7 +84,7 @@ def cadastroUser():
 
     elif opc == "2":      #Juridica
       nome =  input("Informe nome: ")
-      segmento = input("Informe idade: ")
+      segmento = input("Informe segmento: ")
       cnpj = input("Informe cpf: ")      
 
       data = {"nome": nome, "segmento": segmento, "cnpj": cnpj}
@@ -141,24 +137,28 @@ def excluirUser():
       print("Opção invalida!")
       input("Pressione ENTER para continuar!\n")
 
+
 # ------------------------ PROJETO ------------------------
+def cadastroProj():
+  nome =  input("Informe nome: ")
+  segmento = input("Informe idade: ")
+  
+  data = {"nome": nome, "segmento": segmento}
+  requests.post(f"{url}/addprojeto", json=data)
 
+def exibirProj():
+  id = input("Informe o ID: ")
+  resp = requests.get(f"{url}/projeto/" + id)
+  pprint(resp.json())
 
+def alterarProj():
+  pass
 
-
-
+def excluirProj():
+  id = input("Informe o ID: ")
+  resp = requests.delete(f"{url}/projeto/" + id)
+  pprint(resp.json())
 
 
 if __name__ == "__main__":
   main()
-
-
-
-# cliente = {"nome": "Joao Pedro", "endereco": "Rua XYZ"}
-# requests.post(f"{url}/cliente", json=cliente)
-
-# cliente = {"id": "01", "nome": "Ruan", "endereco": "Rua XYZ"}
-# requests.put(f"{url}/cliente", json=cliente)
-
-# r = requests.get(f"{url}/cliente")
-# pprint(r.json())
