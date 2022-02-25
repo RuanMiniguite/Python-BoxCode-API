@@ -24,7 +24,7 @@ def fisica(cpf = None):
                     .one()
                 )
                 return (
-                    jsonify({"cpf": fisica.cpf, "nome": fisica.nome}),
+                    jsonify({"cpf": fisica.cpf, "nome": fisica.nome, "idade": fisica.idade, "instEnsino": fisica.instEnsino}),
                     200,
                 )
             except Exception as ex:
@@ -33,8 +33,9 @@ def fisica(cpf = None):
             lista_fisica = []
             fisica = session.query(Fisica).all()
             for c in fisica:
-                lista_fisica.append({"cpf": c.cpf, "nome": c.nome})
+                lista_fisica.append({"id": c.id, "cpf": c.cpf, "nome": c.nome, "idade": c.idade, "instEnsino": c.instEnsino})
             return jsonify(lista_fisica), 200
+
     elif request.method == "POST":
         fisica = request.json
         session.add(
@@ -45,7 +46,7 @@ def fisica(cpf = None):
     elif request.method == "PUT":
         fisica = request.json
         session.query(Fisica).filter(Fisica.cpf == cpf).update(
-            {"nome": fisica["nome"], "instEnsino": fisica["instEnsino"]}
+            {"nome": fisica["nome"], "instEnsino": fisica["instEnsino"], "idade": fisica["idade"]}
         )
         session.commit()
         return "Pessoa fisica atualizada com sucesso!", 200
@@ -75,7 +76,7 @@ def juridica(cnpj = None):
             except Exception as ex:
                 return "", 404
         else:
-            juridica = []
+            lista_juridica = []
             juridica = session.query(Juridica).all()
             for c in juridica:
                 lista_juridica.append({"cnpj": c.cnpj, "nome": c.nome, "segmento": c.segmento})
@@ -120,7 +121,7 @@ def projeto(id = None):
             except Exception as ex:
                 return "", 404
         else:
-            projeto = []
+            lista_projeto = []
             projeto = session.query(Projeto).all()
             for c in projeto:
                 lista_projeto.append({"id": c.id, "nome": c.nome, "segmento": c.segmento})

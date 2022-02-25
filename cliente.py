@@ -30,7 +30,6 @@ def menu1():
     print("-------------------:-------------------")
 
 def menu2():
-    os.system('clear') or None
     print("-------------------:-------------------")
     print("|        Deseja alterar usuario       |")
     print("|         [1] Sim      [2] Não        |")
@@ -69,7 +68,6 @@ def main():
         elif opc == "9":    
             exit()
         
-        sleep(1)
         input("Pressione ENTER para continuar!\n")
 
 
@@ -97,12 +95,13 @@ def cadastroUser():
 
             data = {"nome": nome, "segmento": segmento, "cnpj": cnpj}
             requests.post(f"{url}/juridica", json=data)
-        
+
+        elif opc == "0":
+            break
+
         else:
             print("Opção invalida!")
             input("Pressione ENTER para continuar!\n")
-
-    input("Pressione ENTER para continuar!\n")  
 
 def exibirUser():
     opc = None
@@ -118,15 +117,17 @@ def exibirUser():
             input("Pressione ENTER para continuar!\n")
         
         elif opc == "2":         #Juridica
-            cpf = input("Informe o cpf: ")
-            resp = requests.get(f"{url}/juridica/" + cpf)
+            cnpj = input("Informe o cnpj: ")
+            resp = requests.get(f"{url}/juridica/" + cnpj)
             pprint(resp.json())
-        
+            input("Pressione ENTER para continuar!\n")
+
+        elif opc == "0":
+            break
+
         else:
             print("Opção invalida!")
             input("Pressione ENTER para continuar!\n")
-
-    input("Pressione ENTER para continuar!\n")
 
 def alterarUser():
     opc = None
@@ -143,7 +144,7 @@ def alterarUser():
             menu2()
             opc1 = input("Informe uma opcao: ")
             
-            if opc1 == 1:
+            if opc1 == "1":
                 nome =  input("Informe nome: ")
                 idade = input("Informe idade: ")
                 instEnsino = input("Informe Instuicao de ensino: ")
@@ -151,32 +152,33 @@ def alterarUser():
                 data = {"nome": nome, "idade": idade, "cpf": cpf, "instEnsino": instEnsino}
                 requests.put(f"{url}/fisica/" + cpf, json=data)
             else:
-                exit()
+                break
 
             input("Pressione ENTER para continuar!\n")
+        
         elif opc == "2":         #Juridica
             cnpj = input("Informe o cnpj: ")
-            resp = requests.get(f"{url}/juridica/" + cpf)
+            resp = requests.get(f"{url}/juridica/" + cnpj)
             pprint(resp.json())
 
             menu2()
             opc1 = input("Informe uma opcao: ")
-            if opc1 == 1:
+            if opc1 == "1":
                 nome =  input("Informe nome: ")
                 segmento = input("Informe segmento: ")
 
                 data = {"nome": nome, "segmento": segmento, "cnpj": cnpj}
-                requests.post(f"{url}/juridica/" + cnpj, json=data)
+                requests.put(f"{url}/juridica/" + cnpj, json=data)
            
             else:
-                exit()
-
+                break
+              
+        elif opc == "0":
+            break
 
         else:
             print("Opção invalida!")
             input("Pressione ENTER para continuar!\n")
-
-    input("Pressione ENTER para continuar!\n")
 
 def excluirUser():
     opc = None
@@ -186,22 +188,21 @@ def excluirUser():
         opc = input("Informe uma opcao: \n")
 
         if opc == "1":
-            id = input("Informe o ID: ")
-            resp = requests.delete(f"{url}/fisica/" + id)
-            pprint(resp.json())
+            cpf = input("Informe o cpf: ")
+            resp = requests.delete(f"{url}/fisica/" + cpf)
+            print(resp)
 
         elif opc == "2":
-            id = input("Informe o ID: ")
-            resp = requests.delete(f"{url}/juridica/" + id)
-            pprint(resp.json())
+            cnpj = input("Informe o cnpj: ")
+            resp = requests.delete(f"{url}/juridica/" + cnpj)
+            print(resp)
+        
+        elif opc == "0":
+            break
 
         else:
             print("Opção invalida!")
             input("Pressione ENTER para continuar!\n")
-
-    input("Pressione ENTER para continuar!\n")
-    
-
 
 # ------------------------ PROJETO ------------------------
 def cadastroProj():
