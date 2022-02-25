@@ -1,7 +1,10 @@
+from urllib import response
 import requests
 from pprint import pprint
 from time import sleep
 import os
+
+from sqlalchemy import null
 
 url = "http://0.0.0.0:8080"
 
@@ -77,7 +80,7 @@ def cadastroUser():
     while opc != 1 and opc != 2 and opc != 0:
         
         menu1()
-        opc = input("Informe uma opcao: \n")
+        opc = input("Informe uma opcao: ")
 
         if opc == "1":        #Fisica
             nome =  input("Informe nome: ")
@@ -108,19 +111,18 @@ def exibirUser():
     while opc != 1 and opc != 2 and opc != 0:
        
         menu1()
-        opc = input("Informe uma opcao: \n")
+        opc = input("Informe uma opcao: ")
 
         if opc == "1":           #Fisica
             cpf = input("Informe o cpf: ")
             resp = requests.get(f"{url}/fisica/" + cpf)
-            pprint(resp.json())
-            input("Pressione ENTER para continuar!\n")
-        
+            # pprint(resp.json())
+            jsonPrint(resp)
+            
         elif opc == "2":         #Juridica
             cnpj = input("Informe o cnpj: ")
             resp = requests.get(f"{url}/juridica/" + cnpj)
-            pprint(resp.json())
-            input("Pressione ENTER para continuar!\n")
+            jsonPrint(resp)
 
         elif opc == "0":
             break
@@ -134,13 +136,13 @@ def alterarUser():
     while opc != 1 and opc != 2 and opc != 0:
         
         menu1()
-        opc = input("Informe uma opcao: \n")
+        opc = input("Informe uma opcao: ")
 
         if opc == "1":           #Fisica
             cpf = input("Informe o cpf: ")
             resp = requests.get(f"{url}/fisica/" + cpf)
-            pprint(resp.json())
-            
+            jsonPrint(resp)
+
             menu2()
             opc1 = input("Informe uma opcao: ")
             
@@ -159,7 +161,7 @@ def alterarUser():
         elif opc == "2":         #Juridica
             cnpj = input("Informe o cnpj: ")
             resp = requests.get(f"{url}/juridica/" + cnpj)
-            pprint(resp.json())
+            jsonPrint(resp)
 
             menu2()
             opc1 = input("Informe uma opcao: ")
@@ -185,17 +187,17 @@ def excluirUser():
     while opc != 1 and opc != 2 and opc != 0:
        
         menu1()
-        opc = input("Informe uma opcao: \n")
+        opc = input("Informe uma opcao: ")
 
         if opc == "1":
             cpf = input("Informe o cpf: ")
             resp = requests.delete(f"{url}/fisica/" + cpf)
-            print(resp)
+            jsonPrint(resp)
 
         elif opc == "2":
             cnpj = input("Informe o cnpj: ")
             resp = requests.delete(f"{url}/juridica/" + cnpj)
-            print(resp)
+            jsonPrint(resp)
         
         elif opc == "0":
             break
@@ -215,7 +217,7 @@ def cadastroProj():
 def exibirProj():
     id = input("Informe o ID: ")
     resp = requests.get(f"{url}/projeto/" + id)
-    pprint(resp.json())
+    jsonPrint(resp)
 
 def alterarProj():
     pass
@@ -223,8 +225,17 @@ def alterarProj():
 def excluirProj():
     id = input("Informe o ID: ")
     resp = requests.delete(f"{url}/projeto/" + id)
-    pprint(resp.json())
+    jsonPrint(resp)
 
+def jsonPrint(resp):
+    if resp.status_code == 200:
+        pprint(resp.json())
+    elif resp.status_code == 201:
+        print("deletado!")
+        print(resp)
+    else:
+        print(resp)
+    input("Pressione ENTER para continuar!\n")
 
 if __name__ == "__main__":
     main()
