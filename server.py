@@ -35,7 +35,6 @@ def fisica(cpf = None):
             for c in fisica:
                 lista_fisica.append({"id": c.id, "cpf": c.cpf, "nome": c.nome, "idade": c.idade, "instEnsino": c.instEnsino})
             return jsonify(lista_fisica), 200
-
     elif request.method == "POST":
         fisica = request.json
         session.add(
@@ -55,7 +54,7 @@ def fisica(cpf = None):
             Fisica.cpf == cpf
         ).delete()
         session.commit()
-        return "Pessoa fisica deletada com sucesso!", 200
+        return "", 201
 
 #Rotas relacionadas a juridica
 @app.route("/juridica", methods=["GET", "POST"])
@@ -100,7 +99,7 @@ def juridica(cnpj = None):
             Juridica.cnpj == cnpj
         ).delete()
         session.commit()
-        return "Pessoa juridica deletada com sucesso!", 200
+        return "", 201
 
 #Rotas relacionadas a projeto
 @app.route("/projeto", methods=["GET", "POST"])
@@ -145,6 +144,6 @@ def projeto(id = None):
             Projeto.id == id
         ).delete()
         session.commit()
-        return "Projeto deletado com sucesso!", 200
+        return "Projeto deletado com sucesso!", 201
 
 app.run(host="0.0.0.0", port=8080)
