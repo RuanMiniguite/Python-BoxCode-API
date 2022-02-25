@@ -149,7 +149,7 @@ def alterarUser():
                 instEnsino = input("Informe Instuicao de ensino: ")
 
                 data = {"nome": nome, "idade": idade, "cpf": cpf, "instEnsino": instEnsino}
-                requests.put(f"{url}/fisica", json=data)
+                requests.put(f"{url}/fisica/" + cpf, json=data)
             else:
                 exit()
 
@@ -166,7 +166,7 @@ def alterarUser():
                 segmento = input("Informe segmento: ")
 
                 data = {"nome": nome, "segmento": segmento, "cnpj": cnpj}
-                requests.post(f"{url}/juridica", json=data)
+                requests.post(f"{url}/juridica/" + cnpj, json=data)
            
             else:
                 exit()
