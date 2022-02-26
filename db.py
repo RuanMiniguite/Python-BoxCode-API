@@ -40,7 +40,11 @@ class Projeto(Base):
     id = Column(Integer, primary_key=True)
     nome = Column(String, nullable=False)
     segmento = Column(String, nullable=False)
+    descricao = Column(String, nullable=False)
+    cpf = Column(String, nullable=False)
+    cnpj = Column(String, nullable=False)
 
+    
 # fim da declaracao
 
 Base.metadata.create_all(engine)
