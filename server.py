@@ -135,7 +135,7 @@ def projeto(nome = None):
     elif request.method == "PUT":
         projeto = request.json
         session.query(Projeto).filter(Projeto.nome == nome).update(
-            {"nome": projeto["nome"], "segmento": projeto["segmento"], "descricao": projeto["descricao"] }
+            {"nome": projeto["nome"], "segmento": projeto["segmento"], "descricao": projeto["descricao"]}
         )
         session.commit()
         return "", 200
@@ -146,4 +146,4 @@ def projeto(nome = None):
         session.commit()
         return "", 201
 
-app.run(host="0.0.0.0", port=8080)
+app.run(host="10.0.1.10", port=8080)

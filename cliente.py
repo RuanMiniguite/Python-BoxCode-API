@@ -6,7 +6,7 @@ import os
 
 from sqlalchemy import null
 
-url = "http://0.0.0.0:8080"
+url = "http://10.0.1.10:8080"
 
 # ------------------------ PRINT ------------------------
 def menu():
@@ -81,7 +81,6 @@ def jsonPrint(resp):
         print(resp)
     else:
         print(resp)
-    input("Pressione ENTER para continuar!\n")
 
 
 # ------------------------ USER ------------------------
@@ -100,7 +99,8 @@ def cadastroUser():
             
             data = {"nome": nome, "idade": idade, "cpf": cpf, "instEnsino": instEnsino}
             requests.post(f"{url}/fisica", json=data)
-        
+            break
+
         elif opc == "2":      #Juridica
             nome =  input("Informe nome: ")
             segmento = input("Informe segmento: ")
@@ -108,7 +108,8 @@ def cadastroUser():
 
             data = {"nome": nome, "segmento": segmento, "cnpj": cnpj}
             requests.post(f"{url}/juridica", json=data)
-
+            break
+        
         elif opc == "0":
             break
 
@@ -126,13 +127,14 @@ def exibirUser():
         if opc == "1":           #Fisica
             cpf = input("Informe o cpf: ")
             resp = requests.get(f"{url}/fisica/" + cpf)
-            # pprint(resp.json())
             jsonPrint(resp)
+            break
             
         elif opc == "2":         #Juridica
             cnpj = input("Informe o cnpj: ")
             resp = requests.get(f"{url}/juridica/" + cnpj)
             jsonPrint(resp)
+            break
 
         elif opc == "0":
             break
@@ -259,24 +261,22 @@ def alterarProj():
     opc = None
     while opc != 1 and opc != 2 and opc != 0:
         nome = input("Informe o nome: ")
-        resp = requests.get(f"{url}/fisica/" + nome)
+        resp = requests.get(f"{url}/projeto/" + nome)
         jsonPrint(resp)
 
         menu2()
         opc = input("Informe uma opcao: ")
         
         if opc == "1":
-            nome =  input("Informe nome: ")
+            newname =  input("Informe nome: ")
             segmento = input("Informe o segmento: ")
             descricao = input("Informe a descrição: ")
 
-            data = {"nome": nome, "segmento": segmento, "descricao": descricao}
-            requests.put(f"{url}/fisica/" + nome, json=data)
-        
+            data = {"nome": newname, "segmento": segmento, "descricao": descricao}
+            requests.put(f"{url}/projeto/" + nome, json=data)
+            break
         else:
             break
-
-        input("Pressione ENTER para continuar!\n")
 
 def excluirProj():
     nome = input("Informe o nome: ")
