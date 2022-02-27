@@ -34,7 +34,7 @@ def menu1():
 
 def menu2():
     print("-------------------:-------------------")
-    print("|        Deseja alterar usuario       |")
+    print("|            Deseja alterar?          |")
     print("|         [1] Sim      [2] Não        |")
     print("-------------------:-------------------")
 
@@ -242,7 +242,6 @@ def cadastroProj():
         else:
             print("Opção invalida!")
             input("Pressione ENTER para continuar!\n")
-
 
     data = {"nome": nome, "segmento": segmento, "descricao": descricao, "cpf": cpf, "cnpj": cnpj}
     requests.post(f"{url}/projeto", json=data)
