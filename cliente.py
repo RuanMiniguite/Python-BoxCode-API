@@ -8,7 +8,7 @@ from sqlalchemy import null
 
 url = "http://0.0.0.0:8080"
 
-
+# ------------------------ PRINT ------------------------
 def menu():
     os.system('clear') or None
     print("-------------------:-------------------")
@@ -72,6 +72,16 @@ def main():
             exit()
         
         input("Pressione ENTER para continuar!\n")
+
+def jsonPrint(resp):
+    if resp.status_code == 200:
+        pprint(resp.json())
+    elif resp.status_code == 201:
+        print("deletado!")
+        print(resp)
+    else:
+        print(resp)
+    input("Pressione ENTER para continuar!\n")
 
 
 # ------------------------ USER ------------------------
@@ -206,12 +216,35 @@ def excluirUser():
             print("Opção invalida!")
             input("Pressione ENTER para continuar!\n")
 
+
 # ------------------------ PROJETO ------------------------
 def cadastroProj():
+    cpf = None
+    cnpj = None
     nome =  input("Informe nome: ")
     segmento = input("Informe o segmento: ")
+    descricao = input("Informe a descrição: ")
 
-    data = {"nome": nome, "segmento": segmento}
+    while opc != 1 and opc != 2 and opc != 0:
+        
+        menu1()
+        opc = input("Informe uma opcao: ")
+
+        if opc == "1":        #Fisica
+            cpf = input("Informe cpf: ")
+        
+        elif opc == "2":      #Juridica
+            cnpj = input("Informe cnpj: ")
+
+        elif opc == "0":
+            break
+
+        else:
+            print("Opção invalida!")
+            input("Pressione ENTER para continuar!\n")
+
+
+    data = {"nome": nome, "segmento": segmento, "descricao": descricao, "cpf": cpf, "cnpj": cnpj}
     requests.post(f"{url}/projeto", json=data)
 
 def exibirProj():
@@ -227,15 +260,6 @@ def excluirProj():
     resp = requests.delete(f"{url}/projeto/" + id)
     jsonPrint(resp)
 
-def jsonPrint(resp):
-    if resp.status_code == 200:
-        pprint(resp.json())
-    elif resp.status_code == 201:
-        print("deletado!")
-        print(resp)
-    else:
-        print(resp)
-    input("Pressione ENTER para continuar!\n")
 
 if __name__ == "__main__":
     main()

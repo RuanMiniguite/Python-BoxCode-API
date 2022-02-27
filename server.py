@@ -128,10 +128,10 @@ def projeto(id = None):
     elif request.method == "POST":
         projeto = request.json
         session.add(
-            Projeto(id = projeto["id"], nome = projeto["nome"], segmento = projeto["segmento"])
+            Projeto(nome = projeto["nome"], segmento = projeto["segmento"], descricao = projeto["descricao"], cpf = projeto["cpf"], cnpj = projeto["cnpj"])
         )
         session.commit()
-        return "Projeto cadastrado com sucesso!", 200
+        return "", 200
     elif request.method == "PUT":
         projeto = request.json
         session.query(Projeto).filter(Projeto.id == id).update(
@@ -144,6 +144,6 @@ def projeto(id = None):
             Projeto.id == id
         ).delete()
         session.commit()
-        return "Projeto deletado com sucesso!", 201
+        return "", 201
 
 app.run(host="0.0.0.0", port=8080)
