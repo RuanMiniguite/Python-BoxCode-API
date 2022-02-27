@@ -224,7 +224,7 @@ def cadastroProj():
     nome =  input("Informe nome: ")
     segmento = input("Informe o segmento: ")
     descricao = input("Informe a descrição: ")
-
+    opc = None
     while opc != 1 and opc != 2 and opc != 0:
         
         menu1()
@@ -232,9 +232,13 @@ def cadastroProj():
 
         if opc == "1":        #Fisica
             cpf = input("Informe cpf: ")
+            cnpj = "-"
+            break
         
         elif opc == "2":      #Juridica
             cnpj = input("Informe cnpj: ")
+            cpf = "-"
+            break
 
         elif opc == "0":
             break

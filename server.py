@@ -103,7 +103,7 @@ def juridica(cnpj = None):
 
 #Rotas relacionadas a projeto
 @app.route("/projeto", methods=["GET", "POST"])
-@app.route("/projeto/<String:nome>", methods=["GET", "PUT", "DELETE"])
+@app.route("/projeto/<string:nome>", methods=["GET", "PUT", "DELETE"])
 def projeto(nome = None):
     if request.method == "GET":
         if nome:
