@@ -134,14 +134,14 @@ def projeto(nome = None):
         return "", 200
     elif request.method == "PUT":
         projeto = request.json
-        session.query(Projeto).filter(Projeto.id == id).update(
-            {"nome": projeto["nome"], "segmento": projeto["segmento"]}
+        session.query(Projeto).filter(Projeto.nome == nome).update(
+            {"nome": projeto["nome"], "segmento": projeto["segmento"], "descricao": projeto["descricao"] }
         )
         session.commit()
-        return "Projeto atualizado com sucesso!", 200
+        return "", 200
     elif request.method == "DELETE":
         session.query(Projeto).filter(
-            Projeto.id == id
+            Projeto.nome == nome
         ).delete()
         session.commit()
         return "", 201
