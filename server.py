@@ -103,18 +103,18 @@ def juridica(cnpj = None):
 
 #Rotas relacionadas a projeto
 @app.route("/projeto", methods=["GET", "POST"])
-@app.route("/projeto/<int:id>", methods=["GET", "PUT", "DELETE"])
-def projeto(id = None):
+@app.route("/projeto/<String:nome>", methods=["GET", "PUT", "DELETE"])
+def projeto(nome = None):
     if request.method == "GET":
         if id:
             try:
                 projeto = (
                     session.query(Projeto)
-                    .filter(Projeto.id == id)
+                    .filter(Projeto.nome == nome)
                     .one()
                 )
                 return (
-                    jsonify({"id": projeto.id, "nome": projeto.nome, "segmento": projeto.segmento}),
+                    jsonify({"id": projeto.id, "nome": projeto.nome, "segmento": projeto.segmento, "descricao": projeto.descricao, "cpf": projeto.cpf, "cnpj": projeto.cnpj}),
                     200,
                 )
             except Exception as ex:
@@ -123,7 +123,7 @@ def projeto(id = None):
             lista_projeto = []
             projeto = session.query(Projeto).all()
             for c in projeto:
-                lista_projeto.append({"id": c.id, "nome": c.nome, "segmento": c.segmento})
+                lista_projeto.append({"id": c.id, "nome": c.nome, "segmento": c.segmento, "descricao": c.descricao, "cpf": c.cpf, "cnpj": c.cnpj})
             return jsonify(lista_projeto), 200
     elif request.method == "POST":
         projeto = request.json
