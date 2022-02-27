@@ -256,11 +256,31 @@ def exibirProj():
     jsonPrint(resp)
 
 def alterarProj():
-    pass
+    opc = None
+    while opc != 1 and opc != 2 and opc != 0:
+        nome = input("Informe o nome: ")
+        resp = requests.get(f"{url}/fisica/" + nome)
+        jsonPrint(resp)
+
+        menu2()
+        opc = input("Informe uma opcao: ")
+        
+        if opc == "1":
+            nome =  input("Informe nome: ")
+            segmento = input("Informe o segmento: ")
+            descricao = input("Informe a descrição: ")
+
+            data = {"nome": nome, "segmento": segmento, "descricao": descricao}
+            requests.put(f"{url}/fisica/" + nome, json=data)
+        
+        else:
+            break
+
+        input("Pressione ENTER para continuar!\n")
 
 def excluirProj():
-    id = input("Informe o ID: ")
-    resp = requests.delete(f"{url}/projeto/" + id)
+    nome = input("Informe o nome: ")
+    resp = requests.delete(f"{url}/projeto/" + nome)
     jsonPrint(resp)
 
 
