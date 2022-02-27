@@ -247,8 +247,8 @@ def cadastroProj():
     requests.post(f"{url}/projeto", json=data)
 
 def exibirProj():
-    id = input("Nome do Projeto: ")
-    resp = requests.get(f"{url}/projeto/" + id)
+    nome = input("Nome do Projeto: ")
+    resp = requests.get(f"{url}/projeto/" + nome)
     jsonPrint(resp)
 
 def alterarProj():
