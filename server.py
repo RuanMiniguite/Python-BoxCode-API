@@ -106,7 +106,7 @@ def juridica(cnpj = None):
 @app.route("/projeto/<String:nome>", methods=["GET", "PUT", "DELETE"])
 def projeto(nome = None):
     if request.method == "GET":
-        if id:
+        if nome:
             try:
                 projeto = (
                     session.query(Projeto)
