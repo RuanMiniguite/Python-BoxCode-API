@@ -2,8 +2,36 @@ from flask import Flask, jsonify, request
 from db import session, Fisica
 from db import Juridica, Projeto
 from pprint import pprint
+import _thread
+import time
+import zmq
 
 app = Flask(__name__)
+
+fila_msg = []
+
+def validarUser():
+    IP_ADDRESS = "10.0.1.10"
+    TOPIC = "test"
+
+    ctx = zmq.Context()
+    sock = ctx.socket(zmq.PUB)
+    sock.connect(f"tcp://{IP_ADDRESS}:5500")
+
+    print(f"Starting publishing to the topic {TOPIC}...")
+    i = 1
+    while True:
+        if (len(fila_msg) > 0):
+            valor = fila_msg.pop(0)
+            sock.send_string(f"{valor}", flags=zmq.SNDMORE)
+            print(f"{valor}")
+        else:
+            print("Sem mensagem nova...")
+        time.sleep(1)
+
+    sock.close()
+    ctx.term()
+
 
 
 @app.route("/inicio", methods=["GET"])
@@ -139,11 +167,7 @@ def projeto(nome = None):
         )
         session.commit()
         return "", 200
-    elif request.method == "DELETE":
-        session.query(Projeto).filter(
-            Projeto.nome == nome
-        ).delete()
-        session.commit()
-        return "", 201
 
+
+_thread.start_new_thread(validarUser, ())
 app.run(host="10.0.1.10", port=8080)
