@@ -54,9 +54,9 @@
 ## About the project
 
 <div align="center">
-  <img src="https://media.discordapp.net/attachments/925787834638544956/925789165717717072/default.png?width=1214&height=683" width=80%>
-<br><br>
-
+  <img src="https://media.discordapp.net/attachments/947924879657799690/947924949518127154/01.png?width=1940&height=1080" width=80%>
+  <img src="https://media.discordapp.net/attachments/947924879657799690/947924949790760960/02.png?width=1940&height=1080" width=80%>
+  <img src="https://media.discordapp.net/attachments/947924879657799690/947924950004662413/03.png?width=1940&height=1080" width=80%>
   <!-- [![Site][Site-shields]][Site-link] -->
 </div>
 
@@ -90,13 +90,6 @@
     <li>Example</li>
     <li>Example</li>
   </ol> -->
-
-
-<!-- ============== IDEAS ============== -->
-<!-- ## Implementation ideas
-- [x] Example
-- [ ] Example -->
-
 
 
 <!-- ============== INSTALLATION ============== -->
