@@ -6,7 +6,7 @@ import os
 
 from sqlalchemy import null
 
-url = "http://10.0.1.10:8080"
+url = "http://0.0.0.0:8080"
 
 # ------------------------ PRINT ------------------------
 def menu():
@@ -205,11 +205,13 @@ def excluirUser():
             cpf = input("Informe o cpf: ")
             resp = requests.delete(f"{url}/fisica/" + cpf)
             jsonPrint(resp)
+            break
 
         elif opc == "2":
             cnpj = input("Informe o cnpj: ")
             resp = requests.delete(f"{url}/juridica/" + cnpj)
             jsonPrint(resp)
+            break
         
         elif opc == "0":
             break

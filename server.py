@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from numpy import append
 from db import session, Fisica
 from db import Juridica, Projeto
 from pprint import pprint
@@ -11,7 +12,7 @@ app = Flask(__name__)
 fila_msg = []
 
 def validarUser():
-    IP_ADDRESS = "10.0.1.10"
+    IP_ADDRESS = "0.0.0.0"
     TOPIC = "test"
 
     ctx = zmq.Context()
@@ -23,7 +24,9 @@ def validarUser():
     while True:
         if (len(fila_msg) > 0):
             valor = fila_msg.pop(0)
+            msg = "test"
             sock.send_string(f"{valor}", flags=zmq.SNDMORE)
+            sock.send_json({"msg": msg})
             print(f"{valor}")
         else:
             print("Sem mensagem nova...")
@@ -31,7 +34,6 @@ def validarUser():
 
     sock.close()
     ctx.term()
-
 
 
 @app.route("/inicio", methods=["GET"])
@@ -65,6 +67,10 @@ def fisica(cpf = None):
             return jsonify(lista_fisica), 200
     elif request.method == "POST":
         fisica = request.json
+        
+        aux = fisica["cpf"]
+        fila_msg.append(aux)
+        
         session.add(
             Fisica(cpf = fisica["cpf"], nome = fisica["nome"], instEnsino = fisica["instEnsino"], idade = fisica["idade"])
         )
@@ -167,7 +173,13 @@ def projeto(nome = None):
         )
         session.commit()
         return "", 200
-
+    elif request.method == "DELETE":
+        session.query(Projeto).filter(
+        Projeto.nome == nome
+    ).delete()
+    session.commit()
+    return "", 201
 
 _thread.start_new_thread(validarUser, ())
-app.run(host="10.0.1.10", port=8080)
+app.run(host="0.0.0.0", port=8080)
+
