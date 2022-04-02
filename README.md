@@ -1,21 +1,15 @@
 <!--  
     Ruan Pezzin Miniguite
-    V. 2.1
-    Readme IFES projects 
+    V. 2.2 
 -->
 
 <!-- ============== HEADER ============== -->
 <div align="center" id="header">
-
-  <a href="https://cachoeiro.ifes.edu.br/">
-    <img src="https://media.discordapp.net/attachments/925719560039043083/925751679519981578/ifes_vila-velha-horizontal-pb.png?width=953&height=294" alt="Logo" width="330">
-  </a>
-  <h3 align="center">Python BoxCode API</h3>
-  <p align="center">
-    API Box Code
-  </p>
+  <a href="https://github.com/RuanMiniguite"><img src="/assets/Ifes.png" alt="Logo" width="450"></a>
+  
+  <h3>Python BoxCode API</h3>
+  <p>API BoxCode</p>
 </div>
-
 
 
 <!-- ===== SUMARIO ===== -->
@@ -23,9 +17,6 @@
   <summary>Table of Contents</summary>
   <ol>
     <li><a href="#about-the-project">About The Project</a></li>
-    <!-- <li><a href="#layout">Layout</a></li> -->
-    <!-- <li><a href="#language-and-tools">Language and tools</a></li> -->
-    <!-- <li><a href="#implementation-ideas">Implementation ideas</a></li> -->
     <li><a href="#installation">Installation</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#author">Author</a></li>
@@ -33,6 +24,7 @@
 </details>
 
 ---
+
 
 
 <!-- ============== SHIELDS ============== -->
@@ -44,52 +36,30 @@
   [![GitHub License][GitHub License-shields]][GitHub License-link]
   [![Website][Website-shields]][Website-link]
 
-  <h4 align="center"> 
-    🚧  Project under construction...  🚧
-  </h4>
+  <h4>🚧 Project under construction... 🚧</h4>
 </div>
+
 
 
 <!-- ============== ABOUT ============== -->
 ## About the project
 
 <div align="center">
-  <img src="https://media.discordapp.net/attachments/947924879657799690/947924949518127154/01.png?width=1940&height=1080" width=80%>
-  <img src="https://media.discordapp.net/attachments/947924879657799690/947924949790760960/02.png?width=1940&height=1080" width=80%>
-  <img src="https://media.discordapp.net/attachments/947924879657799690/947924950004662413/03.png?width=1940&height=1080" width=80%>
+  <img src="/assets/Print_01.png" alt="Print" width=90% >
+  <img src="/assets/Print_02.png" alt="Print" width=90% >
+  <img src="/assets/Print_03.png" alt="Print" width=90% ><br><br>
+
   <!-- [![Site][Site-shields]][Site-link] -->
 </div>
 
-<!-- <p>Project description!</p> -->
-
-
-<!-- ============== LAYOUT ============== -->
-<!-- ## Layout
-
-<div>
-
-  <img src="https://media.discordapp.net/attachments/925787834638544956/925790164939337778/default.png?width=388&height=683" width="25%">
-  <img src="https://media.discordapp.net/attachments/925787834638544956/925790164939337778/default.png?width=388&height=683" width="25%">
-
-</div> -->
-
 
 <!-- ============== LANGUAGE ============== -->
-<!-- ## Language and tools
+## Language and tools
 
-<h4>Front end</h4>
- <ol>
-    <li>Example</li>
-    <li>Example</li>
-    <li>Example</li>
-  </ol>
- 
-<h4>Back end</h4>
- <ol>
-    <li>Example</li>
-    <li>Example</li>
-    <li>Example</li>
-  </ol> -->
+```
+> Python3
+> Mininet
+```
 
 
 <!-- ============== INSTALLATION ============== -->
@@ -103,15 +73,14 @@ Git Clone https://github.com/RuanMiniguite/Python-BoxCode-API.git
 <!-- ============== LICENSE ============== -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License. See `LICENSE` for more information.
 
 
 <!-- ============== AUTHOR ============== -->
-## Authors
+## Author
 
-[<img alt="RuanMiniguite" src="https://github.com/RuanMiniguite.png?size=115" width="115"><br><sub>@RuanMiniguite</sub>](https://github.com/RuanMiniguite)
-
-[<img alt="xZANELLA" src="https://github.com/xZANELLA.png?size=115" width="115"><br><sub>@xZANELLA</sub>](https://github.com/xZANELLA)
+| [<img alt="RuanMiniguite" src="https://github.com/RuanMiniguite.png?size=115" width="115"><br><sub>@RuanMiniguite</sub>](https://github.com/RuanMiniguite) | [<img alt="xZANELLA" src="https://github.com/xZANELLA.png?size=115" width="115"><br><sub>@xZANELLA</sub>](https://github.com/xZANELLA) |
+|-|-|
 
 <p align="right">(<a href="#header">back to top</a>)</p>
 
